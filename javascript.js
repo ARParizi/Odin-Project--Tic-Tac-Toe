@@ -26,26 +26,27 @@ renderConsole();
 promptPlayer();
 function promptPlayer()
 {
-    const ans = parseInt(prompt(`Player ${currentPlayer}, Which position would you like? (0 - 8)`));
+    while(true) {
+        const ans = parseInt(prompt(`Player ${currentPlayer}, Which position would you like? (0 - 8)`));
 
-    if (isNaN(ans) || ans < 0 || ans > 8)
-        promptPlayer();
+        if (isNaN(ans) || ans < 0 || ans > 8)
+            continue;
 
-    const coordinates = translate1DAddrTo2D(ans);
-    if(gameState[coordinates.x][coordinates.y] !== ' ')
-        promptPlayer();
+        const coordinates = translate1DAddrTo2D(ans);
+        if(gameState[coordinates.x][coordinates.y] !== ' ')
+            continue;
 
-    gameState[coordinates.x][coordinates.y] = currentPlayer;
-    renderConsole();
+        gameState[coordinates.x][coordinates.y] = currentPlayer;
+        renderConsole();
 
-    if(newMoveHasWon())
-    {
-        alert(`${currentPlayer} has won`);
-        return;
+        if(newMoveHasWon())
+        {
+            alert(`${currentPlayer} has won`);
+            return;
+        }
+
+        alternatePlayer();
     }
-
-    alternatePlayer();
-    promptPlayer();
 }
 
 function newMoveHasWon() {
