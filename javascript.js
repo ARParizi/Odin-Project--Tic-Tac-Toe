@@ -23,9 +23,8 @@ function alternatePlayer() {
 }
 
 renderConsole();
-promptPlayer();
-function promptPlayer()
-{
+game();
+function game() {
     while(true) {
         const ans = parseInt(prompt(`Player ${currentPlayer}, Which position would you like? (0 - 8)`));
 
