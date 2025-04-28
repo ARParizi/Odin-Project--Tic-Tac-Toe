@@ -1,8 +1,8 @@
 const gameState =
 [
-    [' ', ' ', ' '], // 0 1 2
-    [' ', ' ', ' '], // 3 4 5
-    [' ', ' ', ' ']  // 6 7 8
+    ['-', '-', '-'], // 0 1 2
+    ['-', '-', '-'], // 3 4 5
+    ['-', '-', '-']  // 6 7 8
 ];
 
 function translate1DAddrTo2D(index1d){
@@ -31,16 +31,22 @@ function game() {
         if (isNaN(ans) || ans < 0 || ans > 8)
             continue;
 
-        const coordinates = translate1DAddrTo2D(ans);
-        if(gameState[coordinates.x][coordinates.y] !== ' ')
+        const {x, y} = translate1DAddrTo2D(ans);
+        if(gameState[x][y] !== '-')
             continue;
 
-        gameState[coordinates.x][coordinates.y] = currentPlayer;
+        gameState[x][y] = currentPlayer;
         renderConsole();
 
         if(newMoveHasWon())
         {
             alert(`${currentPlayer} has won`);
+            return;
+        }
+
+        if(isBoardFull())
+        {
+            alert(`Draw is reached`);
             return;
         }
 
@@ -52,10 +58,13 @@ function newMoveHasWon() {
     return false;
 }
 
+function isBoardFull() {
+    return false;
+}
+
 function renderConsole() {
     console.log(`${gameState[0][0]} ${gameState[0][1]} ${gameState[0][2]}   0 1 2`);
     console.log(`${gameState[1][0]} ${gameState[1][1]} ${gameState[1][2]}   3 4 5`);
     console.log(`${gameState[2][0]} ${gameState[2][1]} ${gameState[2][2]}   6 7 8`);
-    console.log();
     console.log();
 }
