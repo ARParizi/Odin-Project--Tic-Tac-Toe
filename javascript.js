@@ -69,7 +69,7 @@ function play() {
 
         if(game.newMoveHasWon())
         {
-            alert(`${currentPlayer} has won`);
+            alert(`${game.getCurrentPlayer()} has won`);
             return;
         }
 
